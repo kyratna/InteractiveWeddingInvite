@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap');
+@import 'tailwindcss';
+
+@theme {
+  --font-serif: 'Playfair Display', 'Cormorant Garamond', serif;
+  --font-display: 'Cormorant Garamond', 'Playfair Display', serif;
+  --font-sans: 'Jost', 'Lato', sans-serif;
+
+  --color-ivory: #faf4ea;
+  --color-cream: #f3e9da;
+  --color-charcoal: #211d1b;
+  --color-charcoal-2: #2c2724;
+  --color-blush: #e3b7ad;
+  --color-rose: #c98f83;
+  --color-rose-deep: #a96a5e;
+
+  --color-haldi: #e0a530;
+  --color-haldi-deep: #c17f1e;
+  --color-mehendi: #5c7a4a;
+  --color-mehendi-gold: #c8a256;
+  --color-sangeet: #c9435c;
+  --color-sangeet-gold: #e0b054;
+  --color-wedding: #cf9a95;
+  --color-reception: #d8b25c;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    font-family: var(--font-sans);
+    background: var(--color-ivory);
+    color: var(--color-charcoal);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  #root {
+    min-height: 100svh;
+  }
+}
+
+@layer utilities {
+  .tracking-label {
+    letter-spacing: 0.28em;
+  }
+
+  .font-display-italic {
+    font-family: var(--font-display);
+    font-style: italic;
+  }
+
+  .arch {
+    border-radius: 999px 999px 0 0;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
