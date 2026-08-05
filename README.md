@@ -5,9 +5,13 @@ feel like opening a physical wedding card — elegant, cinematic, personal —
 rather than a generic template. Designed primarily to be opened from a
 WhatsApp share link on a phone.
 
-**Live demo content:** filled in with placeholder details for "Ananya &
-Pranav" so the whole experience works end to end out of the box. See
+**🔗 Live demo:** [kyratna.github.io/InteractiveWeddingInvite](https://kyratna.github.io/InteractiveWeddingInvite/)
+
+Filled in with placeholder details for "Ananya & Pranav" so the whole
+experience works end to end out of the box. See
 [Making it yours](#making-it-yours) to swap in a real couple's details.
+Auto-deploys to GitHub Pages on every push to `main` via
+[`.github/workflows/deploy-pages.yml`](.github/workflows/deploy-pages.yml).
 
 ---
 
