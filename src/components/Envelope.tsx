@@ -1,18 +1,16 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion, useAnimation } from 'framer-motion'
-import { envelope } from '../data/content'
+import { envelope, nav } from '../data/content'
 import PhotoPlaceholder from './PhotoPlaceholder'
 
 interface EnvelopeProps {
   onOpen: () => void
 }
 
-const OPEN_DRAG_THRESHOLD = -70
-const OPEN_VELOCITY_THRESHOLD = -350
-
 export default function Envelope({ onOpen }: EnvelopeProps) {
   const [visible, setVisible] = useState(true)
   const [showHint, setShowHint] = useState(false)
+  const isOpening = useRef(false)
   const cardControls = useAnimation()
   const envelopeControls = useAnimation()
 
@@ -29,7 +27,8 @@ export default function Envelope({ onOpen }: EnvelopeProps) {
   }, [])
 
   async function handleOpen() {
-    if (!visible) return
+    if (!visible || isOpening.current) return
+    isOpening.current = true
     setShowHint(false)
     await Promise.all([
       cardControls.start({
@@ -88,34 +87,33 @@ export default function Envelope({ onOpen }: EnvelopeProps) {
                     <stop offset="100%" stopColor="#000" stopOpacity="0.5" />
                   </linearGradient>
                 </defs>
-                <circle cx="144" cy="78" r="9" fill="#c98f83" fillOpacity="0.9" />
               </svg>
 
-              {/* peeking card — drag or tap to open */}
+              {/* peeking card — tap to open */}
               <motion.button
                 type="button"
                 aria-label="Open invitation"
-                drag="y"
-                dragElastic={0.25}
-                dragConstraints={{ top: -40, bottom: 0 }}
-                dragMomentum={false}
                 animate={cardControls}
                 onClick={handleOpen}
-                onDragEnd={(_, info) => {
-                  if (
-                    info.offset.y < OPEN_DRAG_THRESHOLD ||
-                    info.velocity.y < OPEN_VELOCITY_THRESHOLD
-                  ) {
-                    handleOpen()
-                  }
-                }}
-                className="absolute inset-x-4 -top-10 flex h-28 cursor-grab flex-col items-center justify-center rounded-sm bg-ivory px-4 text-center shadow-xl active:cursor-grabbing"
-                style={{ touchAction: 'none' }}
+                className="absolute inset-x-4 -top-10 flex h-28 flex-col items-center justify-center rounded-sm bg-ivory px-4 text-center shadow-xl"
               >
                 <p className="font-serif text-lg text-charcoal">{envelope.line1}</p>
                 <p className="tracking-label mt-2 text-[10px] uppercase text-charcoal/60">
                   {envelope.line2}
                 </p>
+              </motion.button>
+
+              {/* monogram seal — tap to open */}
+              <motion.button
+                type="button"
+                aria-label="Open invitation"
+                onClick={handleOpen}
+                whileTap={{ scale: 0.92 }}
+                className="absolute left-1/2 top-[37%] flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-rose shadow-lg ring-2 ring-white/25"
+              >
+                <span className="font-display-italic text-[11px] tracking-wide text-white">
+                  {nav.initials}
+                </span>
               </motion.button>
             </div>
 

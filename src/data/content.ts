@@ -20,7 +20,7 @@ export const envelope = {
   overline: 'Together with their families',
   line1: `${couple.brideName} & ${couple.groomName}`,
   line2: `${couple.weddingDateShort} · ${couple.city}`,
-  hint: 'tap or drag up to open',
+  hint: 'tap to open',
 }
 
 export const hero = {
